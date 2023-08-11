@@ -1,0 +1,22 @@
+{
+  "name": "TypeScript",
+
+  "nullable_suffix": " | null",
+
+  "types": {
+	"String": "string",
+	"Int": "number",
+	"Long": "number",
+	"Float": "number",
+	"Double": "number",
+	"Boolean": "boolean",
+
+	"ImmutableList": "readonly $1[]",
+	"ImmutableMap": "ReadonlyMap<$1, $2>",
+	"ImmutableSet": "ReadonlySet<$1>",
+
+	"MutableList": "$1[]",
+	"MutableMap": "Map<$1, $2>",
+	"MutableSet": "Set<$1>"
+  }
+}

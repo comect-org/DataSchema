@@ -1,0 +1,9 @@
+{
+  "ImmutableList": 1,
+  "ImmutableSet": 1,
+  "ImmutableMap": 2,
+
+  "MutableList": 1,
+  "MutableSet": 1,
+  "MutableMap": 2
+}

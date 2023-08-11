@@ -6,10 +6,15 @@
 
 package org.comect.misc.dataschema
 
-import kotlinx.cli.ArgParser
+import io.github.oshai.kotlinlogging.KotlinLogging
 
-class Main {
-	fun main(args: Array<String>) {
-		Cli.parse(args)
-	}
+fun main(args: Array<String>) {
+	val logger = KotlinLogging.logger{}
+
+	logger.debug { "Test message!" }
+	logger.info { "Test message!" }
+	logger.warn { "Test message!" }
+	logger.error { "Test message!" }
+
+	Cli.parse(args)
 }

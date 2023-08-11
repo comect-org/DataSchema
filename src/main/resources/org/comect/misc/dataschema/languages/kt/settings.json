@@ -1,0 +1,22 @@
+{
+  "name": "Kotlin",
+
+  "nullable_suffix": "?",
+
+  "types": {
+	"String": "String",
+	"Int": "Int",
+	"Long": "Long",
+	"Float": "Float",
+	"Double": "Double",
+	"Boolean": "Boolean",
+
+	"ImmutableList": "List<$1>",
+	"ImmutableMap": "Map<$1, $2>",
+	"ImmutableSet": "Set<$1>",
+
+	"MutableList": "MutableList<$1>",
+	"MutableMap": "MutableMap<$1, $2>",
+	"MutableSet": "MutableSet<$1>"
+  }
+}

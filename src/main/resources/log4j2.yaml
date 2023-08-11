@@ -1,0 +1,15 @@
+Configuration:
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        disableAnsi: false
+        pattern: "%style{%d{yyyy-MM-dd}}{Bright Green} %style{%d{HH:mm:ss}}{Bright Yellow} %style{|}{Gray} %highlight{%-5level} %style{|}{Gray} %style{%.30c{1.1.1.*}}{Bright Magenta} %style{|}{Gray} %msg%n"
+
+  Loggers:
+    Root:
+      level: info
+
+      AppenderRef:
+        - ref: Console

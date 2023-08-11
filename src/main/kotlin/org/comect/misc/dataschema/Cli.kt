@@ -21,7 +21,7 @@ object Cli {
 		parser.parse(args)
 	}
 
-	object Single : Subcommand("single", "Single input file") {
+	object Single : Subcommand("single", "Transform a single input file") {
 		val input by argument(ArgType.String, description = "Input file")
 		val output by argument(ArgType.String, description = "Output file")
 
@@ -40,9 +40,13 @@ object Cli {
 		}
 	}
 
-	object Directory : Subcommand("directory", "") {
+	object Directory : Subcommand("directory", "Transform an entire directory of input files") {
 		val input by argument(ArgType.String, description = "Input directory")
 		val output by argument(ArgType.String, description = "Output directory")
+
+		val recursive by option(
+			ArgType.Boolean, description = "Recurse into sub-folders"
+		).default(false)
 
 		val outputFormats by option(
 			ArgType.String,
