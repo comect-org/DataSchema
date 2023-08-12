@@ -7,13 +7,13 @@
 package org.comect.misc.dataschema
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.comect.misc.dataschema.parsing.getLanguages
+import org.comect.misc.dataschema.settings.getLanguages
 
 fun main(args: Array<String>) {
 	val logger = KotlinLogging.logger {}
 	val languages = getLanguages(true)
 
-	logger.info { "Loaded ${languages.size} languages: " + languages.keys.joinToString() }
+	logger.info { "Loaded ${languages.size} languages: " + languages.keys.sorted().joinToString() }
 
 	Cli.parse(args)
 }

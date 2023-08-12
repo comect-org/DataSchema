@@ -13,3 +13,10 @@ Configuration:
 
       AppenderRef:
         - ref: Console
+
+    Logger:
+      name: org.reflections.Reflections
+      level: warn
+
+      AppenderRef:
+        - ref: Console

@@ -1,6 +1,5 @@
 {
-  "name": "Kotlin",
-
+  "extension": "kt",
   "nullable_suffix": "?",
 
   "types": {

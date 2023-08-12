@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-package org.comect.misc.dataschema.parsing
+package org.comect.misc.dataschema.settings
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,7 +13,7 @@ import org.comect.misc.dataschema.getResource
 
 @Serializable
 data class LanguageSettings(
-	val name: String,
+	val extension: String,
 	val types: Map<String, String>,
 
 	@SerialName("nullable_prefix")

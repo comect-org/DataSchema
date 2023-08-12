@@ -91,14 +91,3 @@ fun withResources(path: String = "", recursive: Boolean = false, body: String.()
 
 	resources.map(body)
 }
-
-
-fun main() {
-	val resources = getResources("languages")
-
-	println(resources.joinToString())
-
-	val resource = getResource("languages/kt/settings.json")
-
-	println(resource)
-}

@@ -1,6 +1,5 @@
 {
-  "name": "TypeScript",
-
+  "extension": "ts",
   "nullable_suffix": " | null",
 
   "types": {

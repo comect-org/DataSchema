@@ -1,0 +1,32 @@
+types:
+  - name: FirstType
+
+    attributes:
+      - name: one
+        type: MutableMap
+
+        parameters:
+          - type: String
+          - type: String
+
+      - name: two
+        type: String
+
+      - name: three
+        type: ImmutableList
+
+        parameters:
+          - type: SecondType
+
+  - name: SecondType
+
+    attributes:
+      - name: one
+        type: Int
+
+      - name: two
+        type: Boolean
+
+settings:
+  package: com.example.test
+  languages: [kt, ts]
