@@ -26,10 +26,10 @@ data class LanguageSettings(
 		private val json = Json.Default
 
 		fun load(language: String): LanguageSettings? {
-			val file = getResource("languages/$language/settings.json")
+			val stream = getResource("languages/$language/settings.json")
 				?: return null
 
-			return json.decodeFromString(file.readText())
+			return json.decodeFromString<LanguageSettings>(stream.readBytes().decodeToString())
 		}
 	}
 }

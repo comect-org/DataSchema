@@ -7,6 +7,8 @@
 plugins {
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.serialization") version "1.9.0"
+
+    id("org.quiltmc.gradle.licenser") version "2.0.1"
 }
 
 val projectVersion: String by project
@@ -23,6 +25,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.logging)
+    implementation(libs.reflections)
 
     testImplementation(kotlin("test"))
 }
@@ -34,3 +37,12 @@ tasks.test {
 kotlin {
     jvmToolchain(8)
 }
+
+license {
+    rule(rootProject.file("LICENSE-HEADER"))
+
+    exclude("**/*.kte")
+    exclude("**/*.yaml")
+}
+
+tasks.build.get().dependsOn(tasks.applyLicenses)

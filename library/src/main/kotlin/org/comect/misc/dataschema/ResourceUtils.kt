@@ -6,19 +6,31 @@
 
 package org.comect.misc.dataschema
 
-import java.io.File
+import org.reflections.Reflections
+import org.reflections.scanners.Scanners
+import java.io.InputStream
 
 const val BASE_PATH = "org/comect/misc/dataschema/"
+
+private val reflections = Reflections(
+	BASE_PATH.replace("/", ".").trim('.'),
+	Scanners.Resources
+)
+
+private val allResources = reflections.getResources(".*").associateWith {
+	object {}.javaClass.getResource("/$it")
+}
 
 /**
  * Retrieve a specific resource at the given path, within the `org.comect.misc.dataschema` package.
  */
-fun getResource(path: String): File? {
+fun getResource(path: String): InputStream? {
 	val actualPath = BASE_PATH + path
-	val resourceURL = ::getResource.javaClass.getResource(actualPath)
+
+	val resourceURL = allResources[actualPath]
 		?: return null
 
-	return File(resourceURL.file)
+	return resourceURL.openStream()
 }
 
 /**
@@ -27,23 +39,32 @@ fun getResource(path: String): File? {
  * @param path Path prefix to search within
  * @param recursive Whether to recurse into subdirectories
  */
-fun getResources(path: String = "", recursive: Boolean = false): Map<String, File> {
+fun getResources(path: String = "", recursive: Boolean = false): List<String> {
 	val prefix = BASE_PATH + path
-	val resourceURL = ::getResources.javaClass.getResource(prefix)
-	val directory = File(checkNotNull(resourceURL) { "Path not found: '$path'" }.file)
 
-	return with(directory) {
-		walk()
-			.let {
-				if (!recursive) {
-					it.maxDepth(1)
+	var paths = allResources
+		.filter { it.key.startsWith(prefix) }
+		.map {
+			it.key.removePrefix(prefix)
+				.replace("\\", "/")
+				.trim('/')
+		}
+
+	if (!recursive) {
+		paths = paths
+			.map {
+				if ("/" in it) {
+					it.split("/", limit = 2).first() + "/"
 				} else {
 					it
 				}
 			}
-			.map { it.path to it }
-			.toMap()
+			.toSet()
+			.toList()
 	}
+
+	// This is silly but required by the type system.
+	return paths
 }
 
 /**
@@ -53,24 +74,10 @@ fun getResources(path: String = "", recursive: Boolean = false): Map<String, Fil
  * @param path Path prefix to search within
  * @param recursive Whether to recurse into subdirectories
  */
-fun filterResources(path: String = "", recursive: Boolean = false, filter: File.() -> File?): Map<String, File> {
-	val prefix = BASE_PATH + path
-	val resourceURL = ::filterResources.javaClass.getResource(prefix)
-	val directory = File(checkNotNull(resourceURL) { "Path not found: '$path'" }.file)
+fun filterResources(path: String = "", recursive: Boolean = false, filter: String.() -> Boolean): List<String> {
+	val resources = getResources(path, recursive)
 
-	return with(directory) {
-		walk()
-			.let {
-				if (!recursive) {
-					it.maxDepth(1)
-				} else {
-					it
-				}
-			}
-			.mapNotNull(filter)
-			.map { it.path to it }
-			.toMap()
-	}
+	return resources.filter(filter)
 }
 
 /**
@@ -79,20 +86,19 @@ fun filterResources(path: String = "", recursive: Boolean = false, filter: File.
  * @param path Path prefix to search within
  * @param recursive Whether to recurse into subdirectories
  */
-fun withResources(path: String = "", recursive: Boolean = false, body: File.() -> Unit) {
-	val prefix = BASE_PATH + path
-	val resourceURL = ::withResources.javaClass.getResource(prefix)
-	val directory = File(checkNotNull(resourceURL) { "Path not found: '$path'" }.file)
+fun withResources(path: String = "", recursive: Boolean = false, body: String.() -> Unit) {
+	val resources = getResources(path, recursive)
 
-	with(directory) {
-		walk()
-			.let {
-				if (!recursive) {
-					it.maxDepth(1)
-				} else {
-					it
-				}
-			}
-			.map(body)
-	}
+	resources.map(body)
+}
+
+
+fun main() {
+	val resources = getResources("languages")
+
+	println(resources.joinToString())
+
+	val resource = getResource("languages/kt/settings.json")
+
+	println(resource)
 }

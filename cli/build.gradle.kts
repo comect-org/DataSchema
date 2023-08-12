@@ -5,8 +5,13 @@
  */
 
 plugins {
+    application
+
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.serialization") version "1.9.0"
+
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("org.quiltmc.gradle.licenser") version "2.0.1"
 }
 
 val projectVersion: String by project
@@ -37,3 +42,26 @@ tasks.test {
 kotlin {
     jvmToolchain(8)
 }
+
+application {
+    mainClass = "org.comect.misc.dataschema.MainKt"
+}
+
+tasks {
+    jar {
+        manifest {
+            attributes(
+                "Main-Class" to "org.comect.misc.dataschema.MainKt"
+            )
+        }
+    }
+}
+
+license {
+    rule(rootProject.file("LICENSE-HEADER"))
+
+    exclude("**/*.kte")
+    exclude("**/*.yaml")
+}
+
+tasks.build.get().dependsOn(tasks.applyLicenses)
