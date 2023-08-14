@@ -7,6 +7,11 @@ kotlinx-serialization = "1.5.1"
 logging = "5.1.0"
 reflections = "0.10.2"
 
+json5k = "0.3.0"
+kaml = "0.55.0"
+ktoml = "0.5.0"
+xmlutil = "0.86.1"
+
 # Log4J dependencies
 jackson = "2.15.2"
 log4j = "2.20.0"
@@ -18,6 +23,12 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 logging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "logging" }
 reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
 
+json5k = { module = "io.github.xn32:json5k", version.ref = "json5k" }
+kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
+ktoml = { module = "com.akuleshov7:ktoml-core", version.ref = "ktoml" }
+xmlutil-core = { module = "io.github.pdvrieze.xmlutil:core-jvm", version.ref = "xmlutil" }
+xmlutil-serialization = { module = "io.github.pdvrieze.xmlutil:serialization-jvm", version.ref = "xmlutil" }
+
 # Log4J dependencies
 jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jackson" }
 jackson-dataformat-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
@@ -27,3 +38,4 @@ jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
 
 [bundles]
 log4j = ["jackson-core", "jackson-dataformat-yaml", "log4j-core", "log4j-slf4j-impl", "jansi"]
+xmlutil = ["xmlutil-core", "xmlutil-serialization"]

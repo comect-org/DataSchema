@@ -24,6 +24,11 @@ dependencies {
     implementation(libs.kotlinx.cli)
     implementation(libs.kotlinx.serialization)
 
+    implementation(libs.json5k)
+    implementation(libs.kaml)
+    implementation(libs.ktoml)
+    implementation(libs.bundles.xmlutil)
+
     implementation(libs.logging)
     implementation(libs.reflections)
 
