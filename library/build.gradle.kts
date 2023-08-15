@@ -23,6 +23,7 @@ repositories {
 dependencies {
     implementation(libs.kotlinx.cli)
     implementation(libs.kotlinx.serialization)
+    implementation(libs.bundles.jte)
 
     implementation(libs.json5k)
     implementation(libs.kaml)

@@ -18,15 +18,24 @@ data class DataSchema(
 @Serializable
 data class Type(
 	val name: String,
+	val comment: String? = null,
 	val attributes: List<Attribute> = listOf(),
 )
 
 @Serializable
 data class Attribute(
 	val type: String,
+	val name: String,
+	val comment: String? = null,
 
-	val name: String? = null,
-	val parameters: List<Attribute> = listOf()
+	val constant: Boolean? = null,
+	val parameters: List<TypeParameter> = listOf(),
+)
+
+@Serializable
+data class TypeParameter(
+	val type: String,
+	val parameters: List<TypeParameter> = listOf(),
 )
 
 @Serializable
@@ -34,5 +43,5 @@ data class Settings(
 	@SerialName("package")
 	val packageName: String,
 
-	val languages: List<String>
+	val languages: List<String>,
 )

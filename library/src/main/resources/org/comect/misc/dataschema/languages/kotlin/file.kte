@@ -1,0 +1,22 @@
+@import org.comect.misc.dataschema.generation.VariableContainer
+
+@param comment: String?
+@param imports: List<String>
+@param name: String
+@param packageName: String
+@param variables: List<VariableContainer>
+
+package ${packageName}
+
+import kotlinx.serialization.Serializable
+@for(importName in imports)import ${importName}
+@endfor
+
+@if (comment != null)${comment}@endif
+@Serializable
+data class ${name} (
+@for(variable in variables)@if (variable.comment != null)
+	${variable.comment}@endif
+	${variable.line},
+@endfor
+)

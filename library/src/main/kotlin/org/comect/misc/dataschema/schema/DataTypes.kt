@@ -19,8 +19,7 @@ import kotlinx.serialization.json.Json
 import org.comect.misc.dataschema.schema.DataType.Companion.instances
 import nl.adaptivity.xmlutil.serialization.XML as Xml
 
-sealed class DataType(val name: String, serializer: SerialFormat, vararg val extensions: String) {
-	data object HOCON : DataType("HOCON", Hocon.Default, "conf", "hocon")
+sealed class DataType(val name: String, val serializer: StringFormat, vararg val extensions: String) {
 	data object JSON : DataType("JSON", Json.Default, "json")
 	data object JSON5 : DataType("JSON5", Json5.Default, "json5")
 	data object TOML : DataType("TOML", Toml.Default, "toml")
@@ -28,9 +27,9 @@ sealed class DataType(val name: String, serializer: SerialFormat, vararg val ext
 	data object YAML : DataType("YAML", Yaml.default, "yml", "yaml")
 
 	companion object {
-		val instances = arrayOf(HOCON, JSON, JSON5, TOML, XML, YAML)
+		val instances = arrayOf(JSON, JSON5, TOML, XML, YAML)
+
+		fun getType(extension: String) =
+			instances.firstOrNull { extension.lowercase() in it.extensions }
 	}
 }
-
-fun DataType.get(extension: String) =
-	instances.firstOrNull { extension.lowercase() in extensions }

@@ -4,6 +4,7 @@ kotlin = "1.9.0"
 kotlinx-cli = "0.3.5"
 kotlinx-serialization = "1.5.1"
 
+jte = "3.0.2"
 logging = "5.1.0"
 reflections = "0.10.2"
 
@@ -21,6 +22,10 @@ jansi = "2.4.0"
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-hocon = { module = "org.jetbrains.kotlinx:kotlinx-serialization-hocon", version.ref = "kotlinx-serialization"}
+
+jte = { module = "gg.jte:jte", version.ref = "jte" }
+jte-kotlin = { module = "gg.jte:jte-kotlin", version.ref = "jte" }
+
 logging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "logging" }
 reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
 
@@ -38,5 +43,6 @@ log4j-slf4j-impl = { module = "org.apache.logging.log4j:log4j-slf4j-impl", versi
 jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
 
 [bundles]
+jte = ["jte", "jte-kotlin"]
 log4j = ["jackson-core", "jackson-dataformat-yaml", "log4j-core", "log4j-slf4j-impl", "jansi"]
 xmlutil = ["xmlutil-core", "xmlutil-serialization"]

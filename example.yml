@@ -1,9 +1,14 @@
 types:
   - name: FirstType
+    comment: >
+      The first type.
+      
+      With two lines in the comment.
 
     attributes:
       - name: one
         type: MutableMap
+        comment: Map strings to strings.
 
         parameters:
           - type: String
@@ -11,6 +16,7 @@ types:
 
       - name: two
         type: String
+        comment: Number two.
 
       - name: three
         type: ImmutableList
@@ -18,15 +24,6 @@ types:
         parameters:
           - type: SecondType
 
-  - name: SecondType
-
-    attributes:
-      - name: one
-        type: Int
-
-      - name: two
-        type: Boolean
-
 settings:
   package: com.example.test
-  languages: [kt, ts]
+  languages: [kotlin]
