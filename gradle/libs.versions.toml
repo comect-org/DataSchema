@@ -20,6 +20,7 @@ jansi = "2.4.0"
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-hocon = { module = "org.jetbrains.kotlinx:kotlinx-serialization-hocon", version.ref = "kotlinx-serialization"}
 logging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "logging" }
 reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
 

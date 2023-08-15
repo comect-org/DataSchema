@@ -27,6 +27,7 @@ dependencies {
     implementation(libs.json5k)
     implementation(libs.kaml)
     implementation(libs.ktoml)
+    implementation(libs.kotlinx.hocon)
     implementation(libs.bundles.xmlutil)
 
     implementation(libs.logging)
