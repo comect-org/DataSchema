@@ -15,6 +15,7 @@ import org.comect.misc.dataschema.schema.TypeParameter
 
 @Serializable
 data class LanguageSettings(
+	val name: String,
 	val extension: String,
 	val types: Map<String, String>,
 	val imports: Map<String, String> = mapOf(),

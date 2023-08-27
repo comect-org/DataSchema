@@ -20,31 +20,31 @@ import java.io.File
 
 private var languages: Map<String, LanguageSettings>? = null
 
-fun generate(file: File): Map<String, Map<String, String>> {
+fun generate(file: File): Map<LanguageSettings, Map<String, String>> {
 	val type = DataType.getType(file.extension)
 		?: error("Unknown file extension: ${file.extension}")
 
 	return generate(file.readText(), type)
 }
 
-fun generate(string: String, type: DataType): Map<String, Map<String, String>> =
+fun generate(string: String, type: DataType): Map<LanguageSettings, Map<String, String>> =
 	generate(
 		type.serializer.decodeFromString<DataSchema>(string)
 	)
 
 
-fun generate(schema: DataSchema): Map<String, Map<String, String>> {
+fun generate(schema: DataSchema): Map<LanguageSettings, Map<String, String>> {
 	if (languages == null) {
 		languages = getLanguages(true)
 	}
 
-	val result: MutableMap<String, MutableMap<String, String>> = mutableMapOf()
+	val result: MutableMap<LanguageSettings, MutableMap<String, String>> = mutableMapOf()
 
 	schema.settings.languages.forEach { languageName ->
 		val language = languages!![languageName]
 			?: error("Unknown language: $languageName")
 
-		result[languageName] = mutableMapOf()
+		result[language] = mutableMapOf()
 
 		schema.types.forEach { type ->
 			val imports = type.attributes.map { collectImports(it, language) }.flatten()
@@ -82,7 +82,7 @@ fun generate(schema: DataSchema): Map<String, Map<String, String>> {
 				variables = variables,
 			)
 
-			result[languageName]!![type.name] = Templates.render(
+			result[language]!![type.name] = Templates.render(
 				"$languageName/file",
 				mapOf(
 					"comment" to typeContainer.comment,

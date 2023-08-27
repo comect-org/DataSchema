@@ -29,6 +29,7 @@ jte-kotlin = { module = "gg.jte:jte-kotlin", version.ref = "jte" }
 logging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "logging" }
 reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
 
+# Serialization dependencies
 json5k = { module = "io.github.xn32:json5k", version.ref = "json5k" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
 ktoml = { module = "com.akuleshov7:ktoml-core", version.ref = "ktoml" }

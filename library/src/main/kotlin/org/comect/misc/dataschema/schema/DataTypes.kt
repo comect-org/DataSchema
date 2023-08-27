@@ -28,6 +28,7 @@ sealed class DataType(val name: String, val serializer: StringFormat, vararg val
 
 	companion object {
 		val instances = arrayOf(JSON, JSON5, TOML, XML, YAML)
+		val extensions = instances.map { it.extensions }.toTypedArray().flatten().sorted()
 
 		fun getType(extension: String) =
 			instances.firstOrNull { extension.lowercase() in it.extensions }

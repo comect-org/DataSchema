@@ -1,4 +1,5 @@
 {
+  "name": "kotlin",
   "extension": "kt",
   "nullable_suffix": "?",
 

@@ -6,10 +6,11 @@
 
 package org.comect.misc.dataschema
 
+import io.github.oshai.kotlinlogging.KLogger
 import kotlin.system.exitProcess
 
-fun exit(message: String, code: Int = 1) {
-	System.err.println(message)
+fun KLogger.quit(code: Int = 1, message: () -> Any) {
+	error(message)
 
 	exitProcess(code)
 }

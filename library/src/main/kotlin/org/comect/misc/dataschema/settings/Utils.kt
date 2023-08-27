@@ -18,11 +18,11 @@ fun getLanguages(reload: Boolean = false): Map<String, LanguageSettings> {
 
 		val newCache = mutableMapOf<String, LanguageSettings>()
 
-		languages.forEach { extension ->
-			val settings = LanguageSettings.load(extension)
+		languages.forEach { name ->
+			val settings = LanguageSettings.load(name)
 
 			if (settings != null) {
-				newCache[extension] = settings
+				newCache[settings.name] = settings
 			}
 		}
 
