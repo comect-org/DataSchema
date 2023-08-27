@@ -10,13 +10,11 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import org.comect.misc.dataschema.schema.DataType
 import org.comect.misc.dataschema.settings.getLanguages
 import java.io.File
-import java.nio.file.Paths
 
 fun main(args: Array<String>) {
 	val logger = KotlinLogging.logger {}
 	val languages = getLanguages(true)
 
-	logger.info { Paths.get("").toAbsolutePath() }
 	logger.info { "Loaded ${languages.size} languages: " + languages.keys.sorted().joinToString() }
 
 	Cli.parse(args)

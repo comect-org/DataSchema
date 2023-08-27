@@ -11,6 +11,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.0"
 
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("edu.sc.seis.launch4j") version "3.0.4"
     id("org.quiltmc.gradle.licenser") version "2.0.1"
 }
 
@@ -64,4 +65,18 @@ license {
     exclude("**/*.yaml")
 }
 
+launch4j {
+    outfile = "DataSchema.exe"
+    mainClassName = "org.comect.misc.dataschema.MainKt"
+    headerType = "console"
+    chdir.set("")
+
+    jvmOptions.set(listOf("-Duser.dir=%OLDPWD%"))
+
+    copyConfigurable.set(emptyArray<Any>())
+
+    setJarTask(project.tasks.shadowJar.get())
+}
+
 tasks.build.get().dependsOn(tasks.applyLicenses)
+tasks.build.get().dependsOn(tasks.createExe)
