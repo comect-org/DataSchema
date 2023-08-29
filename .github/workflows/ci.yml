@@ -1,0 +1,47 @@
+name: CI (PRs/branches)
+
+on:
+  push:
+    branches-ignore:
+      - "gh-pages"
+      - "root"
+
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+
+        with:
+          java-version: 1.17
+          distribution: temurin
+
+      - name: Set up Gradle properties
+        run: |
+          mkdir -p ~/.gradle
+          echo "org.gradle.jvmargs=-XX:MaxMetaspaceSize=5G" >> ~/.gradle/gradle.properties
+
+      - name: Gradle (Build)
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: checkLicenses build createExe
+
+      - name: Upload artifact (Main JARs)
+        uses: actions/upload-artifact@v3
+
+        with:
+          name: JARs
+          path: "*/build/libs/*.jar"
+
+      - name: Upload artifact (Windows wrapper)
+        uses: actions/upload-artifact@v3
+
+        with:
+          name: Windows wrapper
+          path: "cli/build/launch4j/DataSchema.exe"

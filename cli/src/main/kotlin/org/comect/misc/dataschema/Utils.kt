@@ -9,7 +9,7 @@ package org.comect.misc.dataschema
 import io.github.oshai.kotlinlogging.KLogger
 import kotlin.system.exitProcess
 
-fun KLogger.quit(code: Int = 1, message: () -> Any) {
+public fun KLogger.quit(code: Int = 1, message: () -> Any) {
 	error(message)
 
 	exitProcess(code)

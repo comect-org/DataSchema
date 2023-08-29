@@ -12,25 +12,26 @@ import com.akuleshov7.ktoml.Toml
 import com.charleskorn.kaml.Yaml
 import io.github.xn32.json5k.Json5
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerialFormat
 import kotlinx.serialization.StringFormat
-import kotlinx.serialization.hocon.Hocon
 import kotlinx.serialization.json.Json
-import org.comect.misc.dataschema.schema.DataType.Companion.instances
 import nl.adaptivity.xmlutil.serialization.XML as Xml
 
-sealed class DataType(val name: String, val serializer: StringFormat, vararg val extensions: String) {
-	data object JSON : DataType("JSON", Json.Default, "json")
-	data object JSON5 : DataType("JSON5", Json5.Default, "json5")
-	data object TOML : DataType("TOML", Toml.Default, "toml")
-	data object XML : DataType("XML", Xml.defaultInstance, "xml")
-	data object YAML : DataType("YAML", Yaml.default, "yml", "yaml")
+public sealed class DataTypes(
+	public val name: String,
+	public val serializer: StringFormat,
+	public vararg val extensions: String
+) {
+	public data object JSON : DataTypes("JSON", Json.Default, "json")
+	public data object JSON5 : DataTypes("JSON5", Json5.Default, "json5")
+	public data object TOML : DataTypes("TOML", Toml.Default, "toml")
+	public data object XML : DataTypes("XML", Xml.defaultInstance, "xml")
+	public data object YAML : DataTypes("YAML", Yaml.default, "yml", "yaml")
 
-	companion object {
-		val instances = arrayOf(JSON, JSON5, TOML, XML, YAML)
-		val extensions = instances.map { it.extensions }.toTypedArray().flatten().sorted()
+	public companion object {
+		public val instances: Array<DataTypes> = arrayOf(JSON, JSON5, TOML, XML, YAML)
+		public val extensions: List<String> = instances.map { it.extensions }.toTypedArray().flatten().sorted()
 
-		fun getType(extension: String) =
+		public fun getType(extension: String): DataTypes? =
 			instances.firstOrNull { extension.lowercase() in it.extensions }
 	}
 }

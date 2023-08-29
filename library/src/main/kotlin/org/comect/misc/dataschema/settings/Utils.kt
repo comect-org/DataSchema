@@ -10,7 +10,7 @@ import org.comect.misc.dataschema.getResources
 
 private var languageCache: Map<String, LanguageSettings> = mutableMapOf()
 
-fun getLanguages(reload: Boolean = false): Map<String, LanguageSettings> {
+public fun getLanguages(reload: Boolean = false): Map<String, LanguageSettings> {
 	if (reload || languageCache.isEmpty()) {
 		val languages = getResources("languages")
 			.filter { "." !in it }

@@ -10,7 +10,7 @@ import org.reflections.Reflections
 import org.reflections.scanners.Scanners
 import java.io.InputStream
 
-const val BASE_PATH = "org/comect/misc/dataschema/"
+public const val BASE_PATH: String = "org/comect/misc/dataschema/"
 
 private val reflections = Reflections(
 	BASE_PATH.replace("/", ".").trim('.'),
@@ -24,7 +24,7 @@ private val allResources = reflections.getResources(".*").associateWith {
 /**
  * Retrieve a specific resource at the given path, within the `org.comect.misc.dataschema` package.
  */
-fun getResource(path: String): InputStream? {
+public fun getResource(path: String): InputStream? {
 	val actualPath = BASE_PATH + path
 
 	val resourceURL = allResources[actualPath]
@@ -39,7 +39,7 @@ fun getResource(path: String): InputStream? {
  * @param path Path prefix to search within
  * @param recursive Whether to recurse into subdirectories
  */
-fun getResources(path: String = "", recursive: Boolean = false): List<String> {
+public fun getResources(path: String = "", recursive: Boolean = false): List<String> {
 	val prefix = BASE_PATH + path
 
 	var paths = allResources
@@ -74,7 +74,7 @@ fun getResources(path: String = "", recursive: Boolean = false): List<String> {
  * @param path Path prefix to search within
  * @param recursive Whether to recurse into subdirectories
  */
-fun filterResources(path: String = "", recursive: Boolean = false, filter: String.() -> Boolean): List<String> {
+public fun filterResources(path: String = "", recursive: Boolean = false, filter: String.() -> Boolean): List<String> {
 	val resources = getResources(path, recursive)
 
 	return resources.filter(filter)
@@ -86,7 +86,7 @@ fun filterResources(path: String = "", recursive: Boolean = false, filter: Strin
  * @param path Path prefix to search within
  * @param recursive Whether to recurse into subdirectories
  */
-fun withResources(path: String = "", recursive: Boolean = false, body: String.() -> Unit) {
+public fun withResources(path: String = "", recursive: Boolean = false, body: String.() -> Unit) {
 	val resources = getResources(path, recursive)
 
 	resources.map(body)

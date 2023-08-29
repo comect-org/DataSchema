@@ -4,6 +4,8 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+@file:Suppress("StringLiteralDuplication")
+
 package org.comect.misc.dataschema
 
 import kotlinx.serialization.decodeFromString
@@ -12,7 +14,7 @@ import org.comect.misc.dataschema.generation.TypeContainer
 import org.comect.misc.dataschema.generation.VariableContainer
 import org.comect.misc.dataschema.schema.Attribute
 import org.comect.misc.dataschema.schema.DataSchema
-import org.comect.misc.dataschema.schema.DataType
+import org.comect.misc.dataschema.schema.DataTypes
 import org.comect.misc.dataschema.schema.TypeParameter
 import org.comect.misc.dataschema.settings.LanguageSettings
 import org.comect.misc.dataschema.settings.getLanguages
@@ -20,20 +22,19 @@ import java.io.File
 
 private var languages: Map<String, LanguageSettings>? = null
 
-fun generate(file: File): Map<LanguageSettings, Map<String, String>> {
-	val type = DataType.getType(file.extension)
+public fun generate(file: File): Map<LanguageSettings, Map<String, String>> {
+	val type = DataTypes.getType(file.extension)
 		?: error("Unknown file extension: ${file.extension}")
 
 	return generate(file.readText(), type)
 }
 
-fun generate(string: String, type: DataType): Map<LanguageSettings, Map<String, String>> =
+public fun generate(string: String, type: DataTypes): Map<LanguageSettings, Map<String, String>> =
 	generate(
 		type.serializer.decodeFromString<DataSchema>(string)
 	)
 
-
-fun generate(schema: DataSchema): Map<LanguageSettings, Map<String, String>> {
+public fun generate(schema: DataSchema): Map<LanguageSettings, Map<String, String>> {
 	if (languages == null) {
 		languages = getLanguages(true)
 	}
@@ -98,7 +99,7 @@ fun generate(schema: DataSchema): Map<LanguageSettings, Map<String, String>> {
 	return result
 }
 
-fun generateLine(variable: Attribute, languageName: String, language: LanguageSettings): String {
+public fun generateLine(variable: Attribute, languageName: String, language: LanguageSettings): String {
 	val typeString = language.getType(variable)
 
 	return Templates.render(
@@ -112,7 +113,7 @@ fun generateLine(variable: Attribute, languageName: String, language: LanguageSe
 	)
 }
 
-fun collectImports(type: Attribute, language: LanguageSettings): List<String> {
+public fun collectImports(type: Attribute, language: LanguageSettings): List<String> {
 	val imports = mutableListOf(language.imports[type.type])
 
 	if (type.parameters.isNotEmpty()) {
@@ -124,7 +125,7 @@ fun collectImports(type: Attribute, language: LanguageSettings): List<String> {
 	return imports.filterNotNull()
 }
 
-fun collectImports(type: TypeParameter, language: LanguageSettings): List<String?> {
+public fun collectImports(type: TypeParameter, language: LanguageSettings): List<String?> {
 	val imports = mutableListOf(language.imports[type.type])
 
 	if (type.parameters.isNotEmpty()) {

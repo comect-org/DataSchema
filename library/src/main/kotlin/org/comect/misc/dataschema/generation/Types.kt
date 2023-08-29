@@ -9,7 +9,7 @@ package org.comect.misc.dataschema.generation
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TypeContainer(
+public data class TypeContainer(
 	val imports: List<String> = listOf(),
 	val comment: String? = null,
 	val name: String,
@@ -18,7 +18,7 @@ data class TypeContainer(
 )
 
 @Serializable
-data class VariableContainer(
+public data class VariableContainer(
 	val line: String,
 	val comment: String? = null,
 )

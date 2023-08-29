@@ -12,11 +12,11 @@ import gg.jte.TemplateEngine
 import gg.jte.output.StringOutput
 import gg.jte.resolve.ResourceCodeResolver
 
-object Templates {
+public object Templates {
 	private val resolver: CodeResolver = ResourceCodeResolver("org/comect/misc/dataschema/languages")
 	private val engine: TemplateEngine = TemplateEngine.create(resolver, ContentType.Plain)
 
-	fun render(name: String, parameters: Map<String, Any?>? = null): String {
+	public fun render(name: String, parameters: Map<String, Any?>? = null): String {
 		val output = StringOutput()
 
 		engine.render("$name.kte", parameters, output)

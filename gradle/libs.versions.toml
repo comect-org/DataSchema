@@ -1,5 +1,6 @@
 [versions]
-kotlin = "1.9.0"
+detekt = "1.23.1"
+kotlin = "1.9.10"
 
 kotlinx-cli = "0.3.5"
 kotlinx-serialization = "1.5.1"
@@ -22,6 +23,9 @@ jansi = "2.4.0"
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-hocon = { module = "org.jetbrains.kotlinx:kotlinx-serialization-hocon", version.ref = "kotlinx-serialization"}
+
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
 jte = { module = "gg.jte:jte", version.ref = "jte" }
 jte-kotlin = { module = "gg.jte:jte-kotlin", version.ref = "jte" }

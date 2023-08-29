@@ -7,29 +7,29 @@
 package org.comect.misc.dataschema
 
 import kotlinx.cli.ArgParser
+import kotlinx.cli.ArgParserResult
 import kotlinx.cli.ArgType
-import kotlinx.cli.ExperimentalCli
 import kotlinx.cli.default
 
-object Cli {
+public object Cli {
 	private val parser = ArgParser("dataschema")
 
-	val input by parser
+	public val input: String by parser
 		.argument(ArgType.String, description = "Input file")
 
-	val output by parser
+	public val output: String by parser
 		.option(
 			ArgType.String,
 			shortName = "o",
 			description = "Output folder, will be created if it doesn't exist"
 		).default("out")
 
-	val overwrite by parser.option(
+	public val overwrite: Boolean by parser.option(
 		ArgType.Boolean,
 		shortName = "ow",
 		description = "Overwrite existing files"
 	).default(false)
 
-	fun parse(args: Array<String>) =
+	public fun parse(args: Array<String>): ArgParserResult =
 		parser.parse(args)
 }

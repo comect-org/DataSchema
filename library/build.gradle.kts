@@ -5,10 +5,9 @@
  */
 
 plugins {
-    kotlin("jvm") version "1.9.0"
-    kotlin("plugin.serialization") version "1.9.0"
-
-    id("org.quiltmc.gradle.licenser") version "2.0.1"
+    `dataschema-module`
+    `dokka-module`
+    `published-module`
 }
 
 val projectVersion: String by project
@@ -18,6 +17,11 @@ version = projectVersion
 
 repositories {
     mavenCentral()
+}
+
+metadata {
+    name = "DataSchema"
+    description = "Library for transforming data files into data class-equivalents in various languages"
 }
 
 dependencies {
@@ -41,15 +45,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-kotlin {
-    jvmToolchain(8)
+dokkaModule {
+    includes.add("packages.md")
 }
-
-license {
-    rule(rootProject.file("LICENSE-HEADER"))
-
-    exclude("**/*.kte")
-    exclude("**/*.yaml")
-}
-
-tasks.build.get().dependsOn(tasks.applyLicenses)

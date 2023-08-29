@@ -7,11 +7,11 @@
 package org.comect.misc.dataschema
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.comect.misc.dataschema.schema.DataType
+import org.comect.misc.dataschema.schema.DataTypes
 import org.comect.misc.dataschema.settings.getLanguages
 import java.io.File
 
-fun main(args: Array<String>) {
+public fun main(args: Array<String>) {
 	val logger = KotlinLogging.logger {}
 	val languages = getLanguages(true)
 
@@ -39,18 +39,18 @@ fun main(args: Array<String>) {
 		outputFolder.mkdir()
 	}
 
-	if ((!Cli.overwrite) && outputFolder.listFiles()!!.isNotEmpty()) {
+	if (!Cli.overwrite && outputFolder.listFiles()!!.isNotEmpty()) {
 		logger.quit { "Output directory \"${Cli.output}\" contains files and --overwrite was not specified" }
 	}
 
 	logger.info { "Loading schema..." }
 
-	val type = DataType.getType(inputFile.extension)
+	val type = DataTypes.getType(inputFile.extension)
 
 	if (type == null) {
 		logger.quit {
 			"Unknown input file extension \".${inputFile.extension}\" - supported extensions: " +
-					DataType.extensions.joinToString { ".$it" }
+					DataTypes.extensions.joinToString { ".$it" }
 		}
 	}
 

@@ -10,20 +10,20 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DataSchema(
+public data class DataSchema(
 	val types: List<Type>,
 	val settings: Settings
 )
 
 @Serializable
-data class Type(
+public data class Type(
 	val name: String,
 	val comment: String? = null,
 	val attributes: List<Attribute> = listOf(),
 )
 
 @Serializable
-data class Attribute(
+public data class Attribute(
 	val type: String,
 	val name: String,
 	val comment: String? = null,
@@ -33,13 +33,13 @@ data class Attribute(
 )
 
 @Serializable
-data class TypeParameter(
+public data class TypeParameter(
 	val type: String,
 	val parameters: List<TypeParameter> = listOf(),
 )
 
 @Serializable
-data class Settings(
+public data class Settings(
 	@SerialName("package")
 	val packageName: String,
 
