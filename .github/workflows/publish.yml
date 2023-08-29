@@ -57,8 +57,8 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: "${{ secrets.GPG_KEY }}"
           ORG_GRADLE_PROJECT_signingPassword: "${{ secrets.GPG_PASSWORD }}"
 
-          OSSRH_USERNAME: "${{ secrets.OSSRH_USERNAME }}"
-          OSSRH_PASSWORD: "${{ secrets.OSSRH_PASSWORD }}"
+          ORG_GRADLE_PROJECT_sonatypeUsername: "${{ secrets.OSSRH_USERNAME }}"
+          ORG_GRADLE_PROJECT_sonatypePassword: "${{ secrets.OSSRH_PASSWORD }}"
 
         with:
           arguments: publishToSonatype
