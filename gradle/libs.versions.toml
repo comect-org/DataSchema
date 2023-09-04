@@ -2,7 +2,7 @@
 detekt = "1.23.1"
 kotlin = "1.9.10"
 
-kotlinx-cli = "0.3.5"
+kotlinx-cli = "0.3.6"
 kotlinx-serialization = "1.6.0"
 
 jte = "3.0.3"
