@@ -7,6 +7,7 @@
 package org.comect.misc.dataschema.generation
 
 import kotlinx.serialization.Serializable
+import org.comect.misc.dataschema.schema.Attribute
 
 @Serializable
 public data class TypeContainer(
@@ -19,6 +20,7 @@ public data class TypeContainer(
 
 @Serializable
 public data class VariableContainer(
+	val attribute: Attribute,
 	val line: String,
 	val comment: String? = null,
 )

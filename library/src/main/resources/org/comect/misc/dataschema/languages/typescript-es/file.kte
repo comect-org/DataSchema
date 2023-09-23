@@ -1,0 +1,42 @@
+@import org.comect.misc.dataschema.generation.VariableContainer
+@import org.comect.misc.dataschema.Utils
+
+@param comment: String?
+@param imports: List<String>
+@param name: String
+@param packageName: String
+@param variables: List<VariableContainer>
+
+@for(importName in imports)
+import { ${Utils.splitFirstLast(importName, '.', '/')} } from "${importName}";@endfor
+
+@if (comment != null)${comment}@endif
+export default class ${name} {@for(variable in variables)@if (variable.comment != null)
+
+	${variable.comment}@endif
+	${variable.line};@endfor
+
+	constructor(@for(variable in variables)
+		${variable.line},@endfor
+	) {@for(variable in variables)
+		this.${variable.attribute.name} = ${variable.attribute.name};@endfor
+	}
+
+	toObject() {
+		return {@for(variable in variables)
+			${variable.attribute.name}: this.${variable.attribute.name},@endfor
+		}
+	}
+
+	serialize() {
+		return JSON.stringify(this.toObject());
+	}
+
+	static fromJSON(serialized : string) : ${name} {
+		const obj : ReturnType<${name}["toObject"]> = JSON.parse(serialized);
+
+		return new ${name}(@for(variable in variables)
+			obj.${variable.attribute.name},@endfor
+		)
+	}
+}

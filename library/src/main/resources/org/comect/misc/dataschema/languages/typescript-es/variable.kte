@@ -1,0 +1,9 @@
+@param name: String
+@param type: String
+@param constant: Boolean?
+
+@if (constant == true)
+	const ${name}: ${type}
+@else
+	${name}: ${type}
+@endif

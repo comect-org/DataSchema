@@ -1,0 +1,24 @@
+{
+  "name": "python",
+  "extension": "py",
+
+  "nullable_prefix": "typing.Optional[",
+  "nullable_suffix": "]",
+
+  "types": {
+	"String": "str",
+	"Int": "int",
+	"Long": "int",
+	"Float": "float",
+	"Double": "float",
+	"Boolean": "bool",
+
+	"ImmutableList": "list[$1]",
+	"ImmutableMap": "dict[$1, $2]",
+	"ImmutableSet": "set[$1]",
+
+	"MutableList": "list[$1]",
+	"MutableMap": "dict[$1, $2]",
+	"MutableSet": "set[$1]"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "name": "typescript",
-  "extension": "ts",
+  "name": "typescript-es",
+  "extension": "mts",
   "nullable_suffix": " | null",
 
   "types": {

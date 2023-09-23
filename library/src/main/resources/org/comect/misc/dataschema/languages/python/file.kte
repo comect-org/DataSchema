@@ -1,0 +1,21 @@
+@import org.comect.misc.dataschema.generation.VariableContainer
+
+@param comment: String?
+@param imports: List<String>
+@param name: String
+@param packageName: String
+@param variables: List<VariableContainer>
+
+@for(importName in imports)import ${importName}
+@endfor
+
+import typing
+from dataclasses import dataclass
+
+@dataclass
+class ${name}:
+@if (comment != null)${comment.prependIndent("    ")}
+@endif@for(variable in variables)
+    ${variable.line}@if (variable.comment != null)
+    ${variable.comment}
+@endif@endfor

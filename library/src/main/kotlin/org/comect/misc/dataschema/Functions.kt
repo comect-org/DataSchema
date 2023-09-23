@@ -70,6 +70,7 @@ public fun generate(schema: DataSchema): Map<LanguageSettings, Map<String, Strin
 				}
 
 				VariableContainer(
+					attribute = variable,
 					comment = variableComment,
 					line = generateLine(variable, languageName, language)
 				)

@@ -8,15 +8,13 @@
 
 package ${packageName}
 
-import kotlinx.serialization.Serializable
-@for(importName in imports)import ${importName}
-@endfor
+import kotlinx.serialization.Serializable@for(importName in imports)
+import ${importName}@endfor
 
 @if (comment != null)${comment}@endif
 @Serializable
-data class ${name} (
-@for(variable in variables)@if (variable.comment != null)
+data class ${name} (@for(variable in variables)@if (variable.comment != null)
+
 	${variable.comment}@endif
-	${variable.line},
-@endfor
+	${variable.line},@endfor
 )

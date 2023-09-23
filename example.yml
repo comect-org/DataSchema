@@ -22,8 +22,8 @@ types:
         type: ImmutableList
 
         parameters:
-          - type: SecondType
+          - type: Boolean
 
 settings:
   package: com.example.test
-  languages: [kotlin]
+  languages: [kotlin, typescript-es, typescript-cjs, python]

@@ -1,0 +1,5 @@
+@param name: String
+@param type: String
+@param constant: Boolean?
+
+${name}: ${type}
