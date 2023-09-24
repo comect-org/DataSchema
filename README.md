@@ -188,7 +188,7 @@ settings:
 **Cli:** `java -jar DataSchema.jar example.yml --overwrite`
 
 <details>
-	<sumary>Output: `out/FirstType.kt` (`kotlin`)</sumary>
+	<summary>Output: `out/FirstType.kt` (`kotlin`)</summary>
 
 ```kt
 package com.example.test
@@ -213,7 +213,7 @@ data class FirstType(
 </details>
 
 <details>
-	<sumary>Output: `out/FirstType.cts` (`typescript-cjs`)</sumary>
+	<summary>Output: `out/FirstType.cts` (`typescript-cjs`)</summary>
 
 ```ts
 /**
@@ -270,7 +270,7 @@ module.exports = {
 </details>
 
 <details>
-	<sumary>Output: `out/FirstType.mts` (`typescript-es`)</sumary>
+	<summary>Output: `out/FirstType.mts` (`typescript-es`)</summary>
 
 ```ts
 /**
@@ -322,7 +322,7 @@ export default class FirstType {
 </details>
 
 <details>
-	<sumary>Output: `out/FirstType.py` (`python`)</sumary>
+	<summary>Output: `out/FirstType.py` (`python`)</summary>
 
 ```py
 import typing
