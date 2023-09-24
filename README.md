@@ -150,7 +150,7 @@ DataSchema supports the following languages:
 # Example Output
 
 <details>
-	<summary>Definition file: `example.yml`</summary>
+	<summary>Definition file: <code>example.yml</code></summary>
 
 ```yml
 types:
@@ -188,7 +188,7 @@ settings:
 **Cli:** `java -jar DataSchema.jar example.yml --overwrite`
 
 <details>
-	<summary>Output: `out/FirstType.kt` (`kotlin`)</summary>
+	<summary>Output: <code>out/FirstType.kt</code> (<code>kotlin</code>)</summary>
 
 ```kt
 package com.example.test
@@ -213,7 +213,7 @@ data class FirstType(
 </details>
 
 <details>
-	<summary>Output: `out/FirstType.cts` (`typescript-cjs`)</summary>
+	<summary>Output: <code>out/FirstType.cts</code> (<code>typescript-cjs</code>)</summary>
 
 ```ts
 /**
@@ -270,7 +270,7 @@ module.exports = {
 </details>
 
 <details>
-	<summary>Output: `out/FirstType.mts` (`typescript-es`)</summary>
+	<summary>Output: <code>out/FirstType.mts</code> (<code>typescript-es</code>)</summary>
 
 ```ts
 /**
@@ -322,7 +322,7 @@ export default class FirstType {
 </details>
 
 <details>
-	<summary>Output: `out/FirstType.py` (`python`)</summary>
+	<summary>Output: <code>out/FirstType.py</code> (<code>python</code>)</summary>
 
 ```py
 import typing
