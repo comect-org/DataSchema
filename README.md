@@ -57,11 +57,11 @@ For more information on how these files work, you should
 ## Arguments
 
 - `input` - Path to your definition file, which may be any of the supported formats.
-- `output` - Path to a directory to output resulting files to.
+- `output` - Path to a directory to output resulting files to. Defaults to `out/`.
 
 ## Options
 
-- `--overwrite` or `-ow` (default: `true`) - whether to overwrite existing files.
+- `--overwrite` or `-ow` (default: `false`) - whether to overwrite existing files.
 
 ## Definition Files
 
@@ -140,7 +140,207 @@ If you like, you can [browse those files yourself](library/src/main/resources/or
 
 DataSchema supports the following languages:
 
-- `kotlin` - Kotlin data classes with `kotlinx.serialization` support
-- `python` - Python dataclasses
-- `typescript-cjs` - TypeScript CommonJS module-style classes, with built-in JSON serialisation functions
-- `typescript-es` - TypeScript ES module-style classes, with built-in JSON serialisation functions
+- `kotlin` (`.kt`) — Kotlin data classes with `kotlinx.serialization` support
+- `python` (`.py`) — Python dataclasses
+- `typescript-cjs` (`.cts`) — TypeScript CommonJS module-style classes, with built-in JSON serialisation functions
+- `typescript-es` (`.mts`) — TypeScript ES module-style classes, with built-in JSON serialisation functions
+
+---
+
+# Example Output
+
+<details>
+	<summary>Definition file: `example.yml`</summary>
+
+```yml
+types:
+  - name: FirstType
+    comment: >
+      The first type.
+
+      With two lines in the comment.
+
+    attributes:
+      - name: one
+        type: MutableMap
+        comment: Map strings to strings.
+
+        parameters:
+          - type: String
+          - type: String
+
+      - name: two
+        type: String
+        comment: Number two.
+
+      - name: three
+        type: ImmutableList
+
+        parameters:
+          - type: Boolean
+
+settings:
+  package: com.example.test
+  languages: [kotlin, typescript-es, typescript-cjs, python]
+```
+</details>
+
+**Cli:** `java -jar DataSchema.jar example.yml --overwrite`
+
+<details>
+	<sumary>Output: `out/FirstType.kt` (`kotlin`)</sumary>
+
+```kt
+package com.example.test
+
+import kotlinx.serialization.Serializable
+
+/*
+ * The first type.
+ * With two lines in the comment.
+ */
+@Serializable
+data class FirstType(
+
+	/** Map strings to strings. **/
+	val one: MutableMap<String, String>,
+
+	/** Number two. **/
+	val two: String,
+	val three: List<Boolean>,
+)
+```
+</details>
+
+<details>
+	<sumary>Output: `out/FirstType.cts` (`typescript-cjs`)</sumary>
+
+```ts
+/**
+ * The first type.
+ * With two lines in the comment.
+ */
+class FirstType {
+
+	/** Map strings to strings. */
+	one: Map<string, string>;
+
+	/** Number two. */
+	two: string;
+	three: readonly boolean[];
+
+	constructor(
+		one: Map<string, string>,
+		two: string,
+		three: readonly boolean[],
+	) {
+		this.one = one;
+		this.two = two;
+		this.three = three;
+	}
+
+	toObject() {
+		return {
+			one: this.one,
+			two: this.two,
+			three: this.three,
+		}
+	}
+
+	serialize() {
+		return JSON.stringify(this.toObject());
+	}
+
+	static fromJSON(serialized : string) : FirstType {
+		const obj : ReturnType<FirstType["toObject"]> = JSON.parse(serialized);
+
+		return new FirstType(
+			obj.one,
+			obj.two,
+			obj.three,
+		)
+	}
+}
+
+module.exports = {
+	FirstType,
+	default: FirstType
+}
+```
+</details>
+
+<details>
+	<sumary>Output: `out/FirstType.mts` (`typescript-es`)</sumary>
+
+```ts
+/**
+ * The first type.
+ * With two lines in the comment.
+ */
+export default class FirstType {
+
+	/** Map strings to strings. */
+	one: Map<string, string>;
+
+	/** Number two. */
+	two: string;
+	three: readonly boolean[];
+
+	constructor(
+		one: Map<string, string>,
+		two: string,
+		three: readonly boolean[],
+	) {
+		this.one = one;
+		this.two = two;
+		this.three = three;
+	}
+
+	toObject() {
+		return {
+			one: this.one,
+			two: this.two,
+			three: this.three,
+		}
+	}
+
+	serialize() {
+		return JSON.stringify(this.toObject());
+	}
+
+	static fromJSON(serialized : string) : FirstType {
+		const obj : ReturnType<FirstType["toObject"]> = JSON.parse(serialized);
+
+		return new FirstType(
+			obj.one,
+			obj.two,
+			obj.three,
+		)
+	}
+}
+```
+</details>
+
+<details>
+	<sumary>Output: `out/FirstType.py` (`python`)</sumary>
+
+```py
+import typing
+from dataclasses import dataclass
+
+@dataclass
+class FirstType:
+    """
+    The first type.
+    With two lines in the comment.
+    """
+
+    one: dict[str, str]
+    """Map strings to strings."""
+
+    two: str
+    """Number two."""
+
+    three: list[bool]
+```
+</details>

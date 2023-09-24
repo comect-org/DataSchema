@@ -1,11 +1,7 @@
 @param comment: List<String>
 
-@if(comment.size > 1)
-/**
-	@for(line in comment)
- * ${line}
-	@endfor
- */
-@else
-/** ${comment.first()} */
+@if(comment.size > 1)/**
+@for(line in comment) * ${line}
+@endfor */
+@else/** ${comment.first()} */
 @endif
