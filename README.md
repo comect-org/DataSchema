@@ -90,10 +90,12 @@ You must structure definition files as follows:
 		- `comment` (**string**) — An optional comment to annotate the attribute with.
 		- `constant` (**boolean**) — For languages that support it, whether the attribute should be a constant.
 		- `name` (**string**) — Name of the attribute.
+        - `nullable` (**boolean**) — Optionally, whether this type is nullable.
 		- `type` (**string**) — A supported data type.
 		- `parameters` (**list**) — For container types, a list of type parameters.
 			- `parameters` (**list**) — For container types, a list of type parameters.
 			- `type` (**string**) — A supported data type.
+            - `nullable` (**boolean**) — Optionally, whether this type is nullable.
 - `settings` (**map**) — Generation settings.
 	- `languages` (**list**) — List of languages to generate code for.
 	- `packageName` (**string**) — Package name to use, for languages that require a package definition.
@@ -168,9 +170,11 @@ types:
         parameters:
           - type: String
           - type: String
+            nullable: true
 
       - name: two
         type: String
+        nullable: true
         comment: Number two.
 
       - name: three
@@ -203,10 +207,10 @@ import kotlinx.serialization.Serializable
 data class FirstType(
 
 	/** Map strings to strings. **/
-	val one: MutableMap<String, String>,
+	val one: MutableMap<String, String?>,
 
 	/** Number two. **/
-	val two: String,
+	val two: String?,
 	val three: List<Boolean>,
 )
 ```
@@ -223,15 +227,15 @@ data class FirstType(
 class FirstType {
 
 	/** Map strings to strings. */
-	one: Map<string, string>;
+	one: Map<string, string | null>;
 
 	/** Number two. */
-	two: string;
+	two: string | null;
 	three: readonly boolean[];
 
 	constructor(
-		one: Map<string, string>,
-		two: string,
+		one: Map<string, string | null>,
+		two: string | null,
 		three: readonly boolean[],
 	) {
 		this.one = one;
@@ -280,15 +284,15 @@ module.exports = {
 export default class FirstType {
 
 	/** Map strings to strings. */
-	one: Map<string, string>;
+	one: Map<string, string | null>;
 
 	/** Number two. */
-	two: string;
+	two: string | null;
 	three: readonly boolean[];
 
 	constructor(
-		one: Map<string, string>,
-		two: string,
+		one: Map<string, string | null>,
+		two: string | null,
 		three: readonly boolean[],
 	) {
 		this.one = one;
@@ -335,10 +339,10 @@ class FirstType:
     With two lines in the comment.
     """
 
-    one: dict[str, str]
+    one: dict[str, typing.Optional[str]]
     """Map strings to strings."""
 
-    two: str
+    two: typing.Optional[str]
     """Number two."""
 
     three: list[bool]

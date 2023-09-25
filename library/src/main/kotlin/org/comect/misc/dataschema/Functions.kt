@@ -101,7 +101,7 @@ public fun generate(schema: DataSchema): Map<LanguageSettings, Map<String, Strin
 }
 
 public fun generateLine(variable: Attribute, languageName: String, language: LanguageSettings): String {
-	val typeString = language.getType(variable)
+	var typeString = language.getType(variable)
 
 	return Templates.render(
 		"$languageName/variable",

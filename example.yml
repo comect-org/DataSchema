@@ -13,9 +13,11 @@ types:
         parameters:
           - type: String
           - type: String
+            nullable: true
 
       - name: two
         type: String
+        nullable: true
         comment: Number two.
 
       - name: three

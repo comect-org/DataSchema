@@ -22,10 +22,10 @@ public data class LanguageSettings(
 	val imports: Map<String, String> = mapOf(),
 
 	@SerialName("nullable_prefix")
-	val nullablePrefix: String? = null,
+	val nullablePrefix: String = "",
 
 	@SerialName("nullable_suffix")
-	val nullableSuffix: String? = null,
+	val nullableSuffix: String = "",
 ) {
 	private fun getType(type: String) =
 		types[type] ?: type
@@ -33,10 +33,20 @@ public data class LanguageSettings(
 	public fun getType(type: Attribute): String {
 		var typeString = getType(type.type)
 
+		if (type.nullable) {
+			typeString = "$nullablePrefix${typeString}$nullableSuffix"
+		}
+
 		type.parameters.forEachIndexed { index, param ->
+			var innerString = getType(param)
+
+			if (param.nullable) {
+				innerString = "$nullablePrefix${innerString}$nullableSuffix"
+			}
+
 			typeString = typeString.replace(
 				"$${index + 1}",
-				getType(param)
+				innerString
 			)
 		}
 

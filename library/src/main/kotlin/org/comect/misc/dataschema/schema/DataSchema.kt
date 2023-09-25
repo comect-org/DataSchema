@@ -26,6 +26,7 @@ public data class Type(
 public data class Attribute(
 	val type: String,
 	val name: String,
+	val nullable: Boolean = false,
 	val comment: String? = null,
 
 	val constant: Boolean? = null,
@@ -35,6 +36,7 @@ public data class Attribute(
 @Serializable
 public data class TypeParameter(
 	val type: String,
+	val nullable: Boolean = false,
 	val parameters: List<TypeParameter> = listOf(),
 )
 
