@@ -64,6 +64,16 @@ jobs:
         id: get_tag
         run: echo ::set-output name=NAME::${GITHUB_REF#refs/tags/}
 
+      - name: Clean up JARs
+        run: |
+          mkdir releases
+          
+          mv cli/build/libs/cli-*-all.jar releases/DataSchema.jar
+          mv cli/build/launch4j/*.exe releases/
+          mv cli/scripts/* releases/
+
+          mv library/build/libs/*.jar releases/
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
 
@@ -74,9 +84,7 @@ jobs:
           body_path: release.md
           name: Release ${{ steps.get_tag.outputs.NAME }}
 
-          files: |
-            build/libs/*.jar
-            cli/build/launch4j/DataSchema.exe
+          files: "releases/*"
 
       - name: Release webhook
         run: kotlin .github/release.main.kts
