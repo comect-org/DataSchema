@@ -16,7 +16,7 @@ xmlutil = "0.86.1"
 
 # Log4J dependencies
 jackson = "2.15.2"
-log4j = "2.20.0"
+log4j = "2.21.0"
 jansi = "2.4.0"
 
 [libraries]
