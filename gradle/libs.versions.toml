@@ -17,7 +17,7 @@ xmlutil = "0.86.1"
 # Log4J dependencies
 jackson = "2.15.2"
 log4j = "2.20.0"
-jansi = "2.4.0"
+jansi = "2.4.1"
 
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
